@@ -1,10 +1,10 @@
-# **Flutter 3D Mapbox **
+## **Flutter 3D Mapbox **
 
 A Flutter application using clean architecture and Bloc for state management to integrate Mapbox functionalities such as fetching polylines, tracking user location, and searching locations.
 
 ---
 
-## **Features**
+ **Features**
 - Fetch and display polylines from a remote data source.
 - Track the user's current location.
 - Search for specific locations using a query.
