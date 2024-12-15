@@ -1,8 +1,4 @@
-Here’s a simple and well-structured `README.md` file for your project:
-
----
-
-# **Flutter Mapbox Project**
+# **Flutter 3D Mapbox **
 
 A Flutter application using clean architecture and Bloc for state management to integrate Mapbox functionalities such as fetching polylines, tracking user location, and searching locations.
 
@@ -133,7 +129,3 @@ For any queries or feedback, feel free to reach out:
 - **Author**: Muhammad Qasim
 - **Email**: qasim@afzaal432@gmail.com
 - **GitHub**: https://github.com/Qasim-afzaal
-
----
-
-Let me know if you’d like to customize this further or include any additional sections! 😊
