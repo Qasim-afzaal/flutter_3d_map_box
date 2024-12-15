@@ -127,5 +127,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## **Contact**
 For any queries or feedback, feel free to reach out:
 - **Author**: Muhammad Qasim
-- **Email**: qasim@afzaal432@gmail.com
+- **Email**: qasim.afzaal432@gmail.com
 - **GitHub**: https://github.com/Qasim-afzaal
