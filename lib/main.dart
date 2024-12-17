@@ -1,40 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_3d_map/data/datasource/data_source.dart';
-import 'package:flutter_3d_map/data/repositories/repo_imp.dart';
-import 'package:flutter_3d_map/presentation/bloc/trail_bloc.dart';
-import 'package:flutter_3d_map/presentation/bloc/trail_event.dart';
+import 'package:flutter_3d_map/features/map/data/data_source/map_remote_data_source.dart';
+import 'package:flutter_3d_map/features/map/presentation/pages/map_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'presentation/blocs/trail_bloc.dart';
-import 'presentation/pages/trail_page.dart';
-import 'data/repositories/trail_repository_impl.dart';
-import 'data/datasources/trail_data_source.dart';
+import 'features/map/presentation/bloc/map_bloc.dart';
+import 'features/map/domain/usecases/get_polylines.dart';
+import 'features/map/domain/usecases/get_user_location.dart';
+import 'features/map/domain/usecases/search_location.dart';
+
+import 'features/map/data/repositories/map_repository_impl.dart';
 
 void main() {
-  runApp(const MyApp());
+  final remoteDataSource = MapRemoteDataSourceImpl();
+  final repository = MapRepositoryImpl(remoteDataSource);
+
+  runApp(MyApp(
+    getPolylines: GetPolylines(repository),
+    getUserLocation: GetUserLocation(repository),
+    searchLocation: SearchLocation(repository),
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final GetPolylines getPolylines;
+  final GetUserLocation getUserLocation;
+  final SearchLocation searchLocation;
+
+  MyApp({
+    required this.getPolylines,
+    required this.getUserLocation,
+    required this.searchLocation,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // Setting up dependencies
-    final trailDataSource = TrailDataSource();
-    final trailRepository = TrailRepositoryImpl(trailDataSource);
-
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => TrailBloc(trailRepository)..add(FetchTrails()),
+    return MaterialApp(
+      home: BlocProvider(
+        create: (_) => MapBloc(
+          getPolylines: getPolylines,
+          getUserLocation: getUserLocation,
+          searchLocation: searchLocation,
         ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: '3D Interactive Map',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const TrailPage(),
+        child: MapPage(),
       ),
     );
   }
